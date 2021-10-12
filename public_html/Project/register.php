@@ -36,8 +36,10 @@
         if (empty($email)) {
             array_push($errors, "Email must be set");
         }
-        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $email = sanitize_email($email);
+        //if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if (!is_valid_email($email)) {
             array_push($errors, "Invalid email address");
         }
         if (empty($password)) {
