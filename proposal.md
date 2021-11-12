@@ -1,7 +1,7 @@
 # Project Name: Simple Shop
 ## Project Summary: This project will create a simple e-commerce site for users. Administrators or store owners will be able to manage inventory and users will be able to manage their cart and place orders.
 ## Github Link: https://github.com/matthewmorena/it202-011/tree/prod
-## Project Board Link: 
+## Project Board Link: https://github.com/matthewmorena/it202-011/projects/1
 ## Website Link: https://mem63-prod.herokuapp.com/
 ## Your Name: Matthew Morena
 
@@ -23,87 +23,91 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-  - [ ] \(mm/dd/yyyy of completion) User will be able to register a new account
+  - [X] \(10/12/2021) User will be able to register a new account
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/register.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/11
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
+      - ![image](https://user-images.githubusercontent.com/73557066/141384360-9b14ad9d-9c99-42bb-b6d8-61ed44bdd53f.png)
+        - This is a screenshot of the registration page, including fields for email, username, password, and confirm password.
+      - ![image](https://user-images.githubusercontent.com/73557066/141384588-c6e3d89e-961f-4876-898c-77f8f8e09acf.png)
+        - This is a screenshot of the registration page, showing a successful user registration.
+  - [X] \(10/12/2021) User will be able to login to their account (given they enter the correct credentials)
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/login.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/11
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to logout
+      - ![image](https://user-images.githubusercontent.com/73557066/141384759-21f4c462-0caf-4f41-9eff-90dcd6cced39.png)
+        - This is a screenshot of the login page with some user credentials entered.
+      - ![image](https://user-images.githubusercontent.com/73557066/141384799-19489589-adfc-46a0-b6ce-cf2e3c511916.png)
+        - This is a screenshot showing that the user is logged in on the homepage.
+  - [X] \(10/12/2021) User will be able to logout
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/logout.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/11
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) Basic security rules implemented
+      - ![image](https://user-images.githubusercontent.com/73557066/141384968-1bd4745f-2c01-4741-9454-9dc9c5915ad6.png)
+        - This is a screenshot showing the logout button on the homepage. If pressed, the user is logged out and redirected to the login page.
+  - [X] \(11/08/2021) Basic security rules implemented
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/admin/assign_roles.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/27
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) Basic Roles implemented
+      - ![image](https://user-images.githubusercontent.com/73557066/141385140-e08ded3a-f122-474d-a436-e8bc60cf8124.png)
+        - This is a screenshot showing a message given to the user when they try to visit a page they do not have access to.
+  - [X] \(11/08/2021) Basic Roles implemented
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Pending Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/admin/create_role.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/27
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
+      - ![image](https://user-images.githubusercontent.com/73557066/141387136-b4e1601f-3a4e-4049-8c4f-172a0c5d6a5b.png)
+        - This is a screenshot of the roles table in my database.
+  - [X] \(11/11/2021) Site should have basic styles/theme applied; everything should be styled
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Pending Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/login.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/30
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) Any output messages/errors should be “user friendly”
+      - ![image](https://user-images.githubusercontent.com/73557066/141387254-4feaa963-622b-41a6-872c-948736e88d60.png)
+        - This is a partial screenshot of my styles.css file, and the effects can be seen in the other screenshots of the site.
+  - [X] \(10/21/2021) Any output messages/errors should be “user friendly”
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/home.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/12
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to see their profile
+      - ![image](https://user-images.githubusercontent.com/73557066/141387331-d94d2b33-7587-48aa-af84-542757c6aa18.png)
+        - This is a screenshot of the alerts styling in the css file, and its effects can be shown in other screenshots containing alerts.
+  - [X] \(11/02/2021) User will be able to see their profile
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Pending Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/profile.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/23
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to edit their profile
+      - ![image](https://user-images.githubusercontent.com/73557066/141387583-cd316982-a39d-48b5-bb17-6d5ad362e072.png)
+        - This is a screenshot of the profile page which shows the user their email and username.
+  - [X] \(11/02/2021) User will be able to edit their profile
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Pending Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/profile.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/23
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - ![image](https://user-images.githubusercontent.com/73557066/141387956-540d45ec-fb6c-448d-bcee-b9d63a70ec23.png)
+        - This is a screenshot showing the user that they successfully updated their password, and also showing that they can update their username or email.
 - Milestone 2
 - Milestone 3
 - Milestone 4
