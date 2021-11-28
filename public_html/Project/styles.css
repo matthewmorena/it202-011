@@ -1,3 +1,4 @@
+/*
 .alert-success {
     background-color: green
 }
@@ -13,13 +14,13 @@
 .alert-info {
     background-color: teal;
 }
+*/
 
 nav ul {
     list-style-type: none;
     margin-bottom: 20;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(40, 0, 40);
 }
 
 nav li {
@@ -39,7 +40,6 @@ nav li a {
     text-transform: capitalize;
 }
 nav li a:hover {
-    background-color: rgb(60, 0, 60);
     transform: scale(1.1);
 }
 
