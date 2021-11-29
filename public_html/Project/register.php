@@ -23,6 +23,7 @@ reset_session();
         </div>
         <input type="submit" class="mt-3 btn btn-dark" value="Register" />
     </form>
+    <a href="login.php">Already have an account?</a>
 </div>
 <script>
     function validate(form) {
@@ -94,5 +95,5 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
 }
 ?>
 <?php
-require(__DIR__ . "/../../partials/flash.php");
+require(__DIR__ . "/../../partials/footer.php");
 ?>
