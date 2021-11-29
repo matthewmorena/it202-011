@@ -9,7 +9,8 @@
         echo "<pre>" . var_export($_SESSION, true) . "</pre>";
     } else {
         
-        echo "You're not logged in";
+        echo "You're not logged in. ";
+        echo "<a href=\"login.php\">Login</a>";
     }
 ?>
 <?php
