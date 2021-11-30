@@ -49,12 +49,15 @@ require_once(__DIR__ . "/../lib/functions.php");
                         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Role</a></li>
-                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('admin/add_item.php'); ?>">Add Item</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('admin/list_items.php'); ?>">List Items</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
                 <?php if (is_logged_in()) : ?>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('shop.php'); ?>">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
                 <?php endif; ?>
             </ul>
