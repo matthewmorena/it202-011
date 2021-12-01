@@ -130,3 +130,190 @@ function get_url($dest)
     //handle relative path
     return $BASE_PATH . $dest;
 }
+function get_or_create_account()
+{
+    if (is_logged_in()) {
+        //let's define our data structure first
+        //id is for internal references, account_number is user facing info, and balance will be a cached value of activity
+        $account = ["id" => -1, "account_number" => false, "balance" => 0];
+        //this should always be 0 or 1, but being safe
+        $query = "SELECT id, account, balance from BGD_Accounts where user_id = :uid LIMIT 1";
+        $db = getDB();
+        $stmt = $db->prepare($query);
+        try {
+            $stmt->execute([":uid" => get_user_id()]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$result) {
+                //account doesn't exist, create it
+                $created = false;
+                //we're going to loop here in the off chance that there's a duplicate
+                //it shouldn't be too likely to occur with a length of 12, but it's still worth handling such a scenario
+
+                //you only need to prepare once
+                $query = "INSERT INTO BGD_Accounts (account, user_id) VALUES (:an, :uid)";
+                $stmt = $db->prepare($query);
+                $user_id = get_user_id(); //caching a reference
+                $account_number = "";
+                while (!$created) {
+                    try {
+                        $account_number = str_pad(get_user_id(), 12, "0", STR_PAD_LEFT);
+                        $stmt->execute([":an" => $account_number, ":uid" => $user_id]);
+                        $created = true; //if we got here it was a success, let's exit
+                        flash("Welcome! Your account has been created successfully", "success");
+                    } catch (PDOException $e) {
+                        $code = se($e->errorInfo, 0, "00000", false);
+                        //if it's a duplicate error, just let the loop happen
+                        //otherwise throw the error since it's likely something looping won't resolve
+                        //and we don't want to get stuck here forever
+                        if (
+                            $code !== "23000"
+                        ) {
+                            throw $e;
+                        }
+                    }
+                }
+                //loop exited, let's assign the new values
+                $account["id"] = $db->lastInsertId();
+                $account["account_number"] = $account_number;
+            } else {
+                //$account = $result; //just copy it over
+                $account["id"] = $result["id"];
+                $account["account_number"] = $result["account"];
+                $account["balance"] = $result["balance"];
+            }
+        } catch (PDOException $e) {
+            flash("Technical error: " . var_export($e->errorInfo, true), "danger");
+        }
+        $_SESSION["user"]["account"] = $account; //storing the account info as a key under the user session
+        //Note: if there's an error it'll initialize to the "empty" definition around line 161
+
+    } else {
+        flash("You're not logged in", "danger");
+    }
+}
+function get_account_balance()
+{
+    if (is_logged_in() && isset($_SESSION["user"]["account"])) {
+        return (int)se($_SESSION["user"]["account"], "balance", 0, false);
+    }
+    return 0;
+}
+function get_user_account_id()
+{
+    if (is_logged_in() && isset($_SESSION["user"]["account"])) {
+        return (int)se($_SESSION["user"]["account"], "id", 0, false);
+    }
+    return 0;
+}
+function get_columns($table)
+{
+    $table = se($table, null, null, false);
+    $db = getDB();
+    $query = "SHOW COLUMNS from $table"; //be sure you trust $table
+    $stmt = $db->prepare($query);
+    $results = [];
+    try {
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "<pre>" . var_export($e, true) . "</pre>";
+    }
+    return $results;
+}
+function save_data($table, $data, $ignore = ["submit"])
+{
+    $table = se($table, null, null, false);
+    $db = getDB();
+    $query = "INSERT INTO $table "; //be sure you trust $table
+    //https://www.php.net/manual/en/functions.anonymous.php Example#3
+    $columns = array_filter(array_keys($data), function ($x) use ($ignore) {
+        return !in_array($x, $ignore); // $x !== "submit";
+    });
+    //arrow function uses fn and doesn't have return or { }
+    //https://www.php.net/manual/en/functions.arrow.php
+    $placeholders = array_map(fn ($x) => ":$x", $columns);
+    $query .= "(" . join(",", $columns) . ") VALUES (" . join(",", $placeholders) . ")";
+
+    $params = [];
+    foreach ($columns as $col) {
+        $params[":$col"] = $data[$col];
+    }
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute($params);
+        //https://www.php.net/manual/en/pdo.lastinsertid.php
+        //echo "Successfully added new record with id " . $db->lastInsertId();
+        return $db->lastInsertId();
+    } catch (PDOException $e) {
+        //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+        flash("<pre>" . var_export($e->errorInfo, true) . "</pre>");
+        return -1;
+    }
+}
+function inputMap($fieldType)
+{
+    if (str_contains($fieldType, "varchar")) {
+        return "text";
+    } else if ($fieldType === "text") {
+        return "textarea";
+    } else if (in_array($fieldType, ["int", "decimal"])) { //TODO fill in as needed
+        return "number";
+    }
+    return "text"; //default
+}
+function update_data($table, $id,  $data, $ignore = ["id", "submit"])
+{
+    $columns = array_keys($data);
+    foreach ($columns as $index => $value) {
+        //Note: normally it's bad practice to remove array elements during iteration
+
+        //remove id, we'll use this for the WHERE not for the SET
+        //remove submit, it's likely not in your table
+        if (in_array($value, $ignore)) {
+            unset($columns[$index]);
+        }
+    }
+    $query = "UPDATE $table SET "; //be sure you trust $table
+    $cols = [];
+    foreach ($columns as $index => $col) {
+        array_push($cols, "$col = :$col");
+    }
+    $query .= join(",", $cols);
+    $query .= " WHERE id = :id";
+
+    $params = [":id" => $id];
+    foreach ($columns as $col) {
+        $params[":$col"] = se($data, $col, "", false);
+    }
+    $db = getDB();
+    $stmt = $db->prepare($query);
+    try {
+        $stmt->execute($params);
+        return true;
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e->errorInfo, true) . "</pre>");
+        return false;
+    }
+}
+function add_to_cart($item_id, $user_id, $quantity)
+{
+    error_log("add_item() Item ID: $item_id, User_id: $user_id, Quantity $quantity");
+    //I'm using negative values for predefined items so I can't validate >= 0 for item_id
+    if (/*$item_id <= 0 ||*/$user_id <= 0 || $quantity === 0) {
+        
+        return;
+    }
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO Cart (item_id, user_id, quantity) VALUES (:iid, :uid, :q) ON DUPLICATE KEY UPDATE quantity = quantity + :q");
+    try {
+        //if using bindValue, all must be bind value, can't split between this an execute assoc array
+        $stmt->bindValue(":q", $quantity, PDO::PARAM_INT);
+        $stmt->bindValue(":iid", $item_id, PDO::PARAM_INT);
+        $stmt->bindValue(":uid", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log("Error adding $quantity of $item_id to user $user_id: " . var_export($e->errorInfo, true));
+    }
+    return false;
+}
