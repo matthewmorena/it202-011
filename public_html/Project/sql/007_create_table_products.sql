@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS Products(
     stock int DEFAULT  0,
     cost int DEFAULT  99999,
     visibility int DEFAULT 1,
+    category varchar(20),
     image text, -- this col type can't have a default value
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
