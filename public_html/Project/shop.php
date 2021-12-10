@@ -18,10 +18,10 @@ try {
 }
 
 //Sort and Filters
-$col = se($_GET, "col", "cost", false);
+$col = se($_GET, "col", "unit_price", false);
 //allowed list
-if (!in_array($col, ["cost", "stock", "name", "created", "category"])) {
-    $col = "cost"; //default value, prevent sql injection
+if (!in_array($col, ["unit_price", "stock", "name", "created", "category"])) {
+    $col = "unit_price"; //default value, prevent sql injection
 }
 $order = se($_GET, "order", "asc", false);
 //allowed list
@@ -31,7 +31,7 @@ if (!in_array($order, ["asc", "desc"])) {
 $name = se($_GET, "name", "", false);
 $category = se($_GET, "category", "", false);
 //dynamic query
-$query = "SELECT id, name, description, cost, stock, category, image FROM Products WHERE stock > 0 AND visibility = 1"; //1=1 shortcut to conditionally build AND clauses
+$query = "SELECT id, name, description, unit_price, stock, category, image FROM Products WHERE stock > 0 AND visibility = 1"; //1=1 shortcut to conditionally build AND clauses
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
 if (!empty($name)) {
@@ -48,7 +48,7 @@ if (!empty($col) && !empty($order)) {
 }
 $query .= " LIMIT 10";
 $stmt = $db->prepare($query);
-//$stmt = $db->prepare("SELECT id, name, description, cost, stock, image FROM Products WHERE stock > 0 AND visibility = 1 LIMIT 10");
+//$stmt = $db->prepare("SELECT id, name, description, unit_price, stock, image FROM Products WHERE stock > 0 AND visibility = 1 LIMIT 10");
 try {
     $stmt->execute($params);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -96,7 +96,7 @@ try {
                 <div class="input-group-text">Sort</div>
                 <!-- make sure these match the in_array filter above-->
                 <select class="form-control" name="col" value="<?php se($col); ?>">
-                    <option value="cost">Cost</option>
+                    <option value="unit_price">Price</option>
                     <option value="stock">Stock</option>
                     <option value="name">Name</option>
                     <option value="created">Created</option>
@@ -142,7 +142,7 @@ try {
                         <p class="card-text">Description: <?php se($item, "description"); ?></p>
                     </div>
                     <div class="card-footer">
-                        Cost: $<?php se($item, "cost"); ?> <br />
+                        Price: $<?php se($item, "unit_price"); ?> <br />
                         Stock: <?php se($item, "stock"); ?>
                         <form method="POST" action="product_details.php">
                             <button class="btn btn-dark" name="product" value="<?php se($item, "id"); ?>" >Details</button>
