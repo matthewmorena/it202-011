@@ -25,14 +25,15 @@ error_log("invalid user $user_id");
     }
     if($isValid){
         $db = getDB();
-        $stmt = $db->prepare("SELECT name FROM Products where id = :id");
+        $stmt = $db->prepare("SELECT name, unit_price FROM Products where id = :id");
         $name = "";
         try {
             $stmt->execute([":id" => $item_id]);
             $r = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($r) {
                 $name = se($r, "name", "", false);
-error_log("Got item $name");
+                $price = se($r, "unit_price", "", false);
+                error_log("Got item $name");
             }
         } catch (PDOException $e) {
             error_log("Error getting name of $item_id: " . var_export($e->errorInfo, true));
@@ -41,7 +42,7 @@ error_log("Got item $name");
     }
     if ($isValid) {
 error_log("before add to cart");
-        add_to_cart($item_id, $user_id, $quantity);
+        add_to_cart($item_id, $user_id, $quantity, $price);
 error_log("after add to cart");
         http_response_code(200);
         $response["message"] = "Added $quantity of $name to cart";

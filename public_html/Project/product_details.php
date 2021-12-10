@@ -6,7 +6,7 @@ $results = [];
 $db = getDB();
 
 $prod = $_POST['product'];
-$stmt = $db->prepare("SELECT id, name, description, cost, stock, image FROM Products WHERE id = $prod");
+$stmt = $db->prepare("SELECT id, name, description, unit_price, stock, image FROM Products WHERE id = $prod");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -57,7 +57,7 @@ try {
                         <p class="card-text">Description: <?php se($item, "description"); ?></p>
                     </div>
                     <div class="card-footer">
-                        Cost: $<?php se($item, "cost"); ?>
+                        Price: $<?php se($item, "unit_price"); ?>
                         <label for="quantity">Quantity:</label>
                         <input type="number" id="quantity" name="quantity" min="1">
                         <button onclick="cart('<?php se($item, 'id'); ?>', document.getElementById('quantity').value)" class="btn btn-dark">Add to Cart</button>
