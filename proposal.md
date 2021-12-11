@@ -109,106 +109,142 @@
       - ![image](https://user-images.githubusercontent.com/73557066/141387956-540d45ec-fb6c-448d-bcee-b9d63a70ec23.png)
         - This is a screenshot showing the user that they successfully updated their password, and also showing that they can update their username or email.
 - Milestone 2
-  - [ ] \(mm/dd/yyyy of completion) User with an admin role or shop owner role will be able to add products to inventory
+  - [X] \(11/29/2021) User with an admin role or shop owner role will be able to add products to inventory
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/55
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) Any user will be able to see products with visibility = true on the Shop page
+      - ![image](https://user-images.githubusercontent.com/73557066/144171150-5e2ab3f7-5ad6-4882-a650-183e6cf22198.png)
+        - This is the add item page, only accessible to admin
+  - [X] \(11/29/2021) Any user will be able to see products with visibility = true on the Shop page
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/55
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) Admin/Shop owner will be able to see products with any visibility
+      - ![image](https://user-images.githubusercontent.com/73557066/144171227-369ab866-3527-411f-bac3-5a1c872d13a6.png)
+        - Shop page with products visible to all users
+  - [X] \(11/29/2021) Admin/Shop owner will be able to see products with any visibility
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/55
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) Admin/Shop owner will be able to edit any product
+      - ![image](https://user-images.githubusercontent.com/73557066/144171375-9b7bfc6a-dfa9-4d3d-9fad-fb4774f29206.png)
+        - Items page only visible to admin, showing a product with visibility zero
+  - [X] \(11/29/2021) Admin/Shop owner will be able to edit any product
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/55
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to click an item from a list and view a full page with more info about the item (Product Details Page)
+      - ![image](https://user-images.githubusercontent.com/73557066/144171447-b47bb5c4-eb5f-4352-ad84-71759d296207.png)
+        - Edit item page, only accessible to admin
+  - [X] \(11/29/2021) User will be able to click an item from a list and view a full page with more info about the item (Product Details Page)
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/56
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User must be logged in for any Cart related activity below
+      - ![image](https://user-images.githubusercontent.com/73557066/144171516-49863b4c-8ab4-4e6d-86ee-9356a7a93705.png)
+        - Product details page which shows only one product and allows user to add to cart
+  - [X] \(11/30/2021) User must be logged in for any Cart related activity below
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/57
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to add items to Cart
+      - ![image](https://user-images.githubusercontent.com/73557066/144171650-f08a5fe6-465f-49b9-8904-e7b620f38d74.png)
+        - Trying to visit the cart page while not logged in redirects to login page and gives warning message
+  - [X] \(11/30/2021) User will be able to add items to Cart
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/57
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to see their cart
+      - ![image](https://user-images.githubusercontent.com/73557066/144171735-c767231d-113b-49fb-987b-69507c0d2b48.png)
+        - User can add items to cart on product details page
+  - [X] \(11/30/2021) User will be able to see their cart
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/57
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to change quantity of items in their cart
+      - ![image](https://user-images.githubusercontent.com/73557066/144171790-6f01a9ff-316d-4e8d-b153-0147ebd7e0ce.png)
+        - User can view their cart on the cart page
+  - [X] \(11/30/2021) User will be able to change quantity of items in their cart
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/57
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to remove a single item from their cart vai button click
+      - ![image](https://user-images.githubusercontent.com/73557066/144171855-bfc0547e-31ff-4bbf-9d26-6bdb76ad4435.png)
+        - User can update quantity of items in their cart directly from the cart page
+  - [X] \(11/30/2021) User will be able to remove a single item from their cart via button click
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/57
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-  - [ ] \(mm/dd/yyyy of completion) User will be able to clear their entire cart via a button click
+      - ![image](https://user-images.githubusercontent.com/73557066/144171855-bfc0547e-31ff-4bbf-9d26-6bdb76ad4435.png)
+        - The user can remove an item from their cart by either setting the quantity to zero or clicking the remove button
+  - [X] \(11/30/2021) User will be able to clear their entire cart via a button click
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Status: Completed
     - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/57
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - ![image](https://user-images.githubusercontent.com/73557066/144171970-0441713a-ac7b-4928-8dbb-ad319f337408.png)
+        - User can clear their cart by pressing the clear cart button shown above and then the cart screen will show it is now empty
 - Milestone 3
+- [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
+  -  List of Evidence of Feature Completion
+    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Pull Requests
+      - PR link #1 (repeat as necessary)
+    - Screenshots
+      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
+        - Screenshot #1 description explaining what you're trying to show
+- [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
+  -  List of Evidence of Feature Completion
+    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Pull Requests
+      - PR link #1 (repeat as necessary)
+    - Screenshots
+      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
+        - Screenshot #1 description explaining what you're trying to show
+- [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
+  -  List of Evidence of Feature Completion
+    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Pull Requests
+      - PR link #1 (repeat as necessary)
+    - Screenshots
+      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
+        - Screenshot #1 description explaining what you're trying to show
+- [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
+  -  List of Evidence of Feature Completion
+    - Status: Pending (Completed, Partially working, Incomplete, Pending)
+    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Pull Requests
+      - PR link #1 (repeat as necessary)
+    - Screenshots
+      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
+        - Screenshot #1 description explaining what you're trying to show
 - Milestone 4
 ### Intructions
 #### Don't delete this
