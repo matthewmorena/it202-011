@@ -96,7 +96,7 @@ if (isset($_POST['order'])) {
     $_POST['name'] .= ", " . $_POST['address'] . ", " . $_POST['appt'] . ", " . $_POST['city'] . ", " . $_POST['state'] . ", " . $_POST['country'] . ", " . $_POST['zip'];
     
     $order['user_id'] = get_user_id();
-    $order['total_price'] = 1;
+    $order['total_price'] = $total_cost;
     $order['address'] = $_POST['name'];
     $order['payment_method'] = $_POST['payment'];
 
@@ -138,6 +138,8 @@ if (isset($_POST['order'])) {
         } catch (PDOException $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
+
+        die(header("Location: order_confirmation.php"));
     }
 }
 ?>

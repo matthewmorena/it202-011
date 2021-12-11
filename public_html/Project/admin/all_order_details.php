@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "/../../partials/nav.php");
+require(__DIR__ . "/../../../partials/nav.php");
 
 if (!is_logged_in()) {
     flash("You are not logged in!", "warning");
@@ -8,20 +8,11 @@ if (!is_logged_in()) {
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT MAX(id) FROM Orders WHERE user_id = :uid");
-try {
-    $stmt->execute([":uid" => get_user_id()]);
-    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($r) {
-        $oid = $r;
-    }
-} catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
-}
+
 $stmt = $db->prepare("SELECT OrderItems.order_id, OrderItems.product_id, Products.name, Products.unit_price, OrderItems.quantity, OrderItems.user_id
-FROM OrderItems LEFT JOIN Products ON OrderItems.product_id = Products.id WHERE OrderItems.order_id = :oid AND OrderItems.user_id = :uid;");
+FROM OrderItems LEFT JOIN Products ON OrderItems.product_id = Products.id WHERE OrderItems.order_id = :oid;");
 try {
-    $stmt->execute([":oid" => $oid[0]["MAX(id)"], ":uid" => get_user_id()]);
+    $stmt->execute([":oid" => $_GET["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $results = $r;
@@ -31,7 +22,7 @@ try {
 }
 $stmt = $db->prepare("SELECT address, payment_method from Orders WHERE id = :oid");
 try {
-    $stmt->execute([":oid" => $oid[0]["MAX(id)"]]);
+    $stmt->execute([":oid" => $_GET["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $user_info = $r;
@@ -78,10 +69,9 @@ $total_cost = 0;
         </table>
         <p><strong>Shipping Address:</strong> <?php echo $user_info[0]['address'];?></p>
         <p><strong>Payment Method:</strong> <?php echo $user_info[0]['payment_method'];?></p>
-        <p><strong>Thank you for your order!</strong></p>
-        <a href="purchase_history.php">Your Purchase History</a>
+        <a href="all_purchases.php">All Purchase History</a>
     <?php endif; ?>
 </div>
 <?php
-    require_once(__DIR__ . "/../../partials/footer.php");
+    require_once(__DIR__ . "/../../../partials/footer.php");
 ?>
