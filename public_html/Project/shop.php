@@ -79,9 +79,9 @@ try {
             <div class="input-group">
                 <div class="input-group-text">Category</div>
                 <select class="form-control" name="category" value="<?php se($category); ?>">
-                    <option value=""> none </option>    
+                    <option value=""> None </option>    
                     <?php foreach ($item_categories as $cat) : ?>
-                        <option value="<?php se($cat["category"]); ?>"> <?php se($cat["category"]); ?> </option>
+                        <option value="<?php se($cat["category"]); ?>" style="text-transform: capitalize;"> <?php se($cat["category"]); ?> </option>
                     <?php endforeach ?>
                 </select>
                 <script>
@@ -128,21 +128,21 @@ try {
             <p>No results to show</p>
         <?php endif; ?>
         <?php foreach ($results as $item) : ?>
-            <div class="col">
+            <div class="col-lg-2 d-flex align-items-stretch">
                 <div class="card bg-light">
-                    <div class="card-header">
+                    <div class="card-header" style="text-transform: capitalize;">
                         <?php se($item, "category"); ?>
                     </div>
                     <?php if (se($item, "image", "", false)) : ?>
-                        <img src="<?php se($item, "image"); ?>" class="card-img-top" alt="...">
+                        <img src="<?php se($item, "image"); ?>" class="card-img-top" alt="..." height="200">
                     <?php endif; ?>
 
                     <div class="card-body">
-                        <h5 class="card-title">Name: <?php se($item, "name"); ?></h5>
-                        <p class="card-text">Description: <?php se($item, "description"); ?></p>
+                        <h5 class="card-title"> <?php se($item, "name"); ?></h5>
+                        <p class="card-text"><em> <?php se($item, "description"); ?> </em></p>
                     </div>
                     <div class="card-footer">
-                        Price: $<?php se($item, "unit_price"); ?> <br />
+                        Price: $<?php number_format(se($item, "unit_price"), 2, '.', ','); ?> <br />
                         Stock: <?php se($item, "stock"); ?>
                         <form method="POST" action="product_details.php">
                             <button class="btn btn-dark" name="product" value="<?php se($item, "id"); ?>" >Details</button>

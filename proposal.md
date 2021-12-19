@@ -209,42 +209,44 @@
       - ![image](https://user-images.githubusercontent.com/73557066/144171970-0441713a-ac7b-4928-8dbb-ad319f337408.png)
         - User can clear their cart by pressing the clear cart button shown above and then the cart screen will show it is now empty
 - Milestone 3
-- [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
+- [X] \(12/09/2021) User will be able to purchase items in their Cart
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/cart.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/63
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
+      - ![image](https://user-images.githubusercontent.com/73557066/145662644-3316b2ac-093f-426c-a071-8c991dc18ce6.png)
+        - This is an image of the cart page showing the form that you fill out to complete a purchase
+- [X] \(12/10/2021) Order Confirmation Page
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/order_confirmation.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/73
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
+      - ![image](https://user-images.githubusercontent.com/73557066/145662749-cd87c515-4bd5-4d3b-9362-dd81b3ffa821.png)
+        - This is an image showing the order confirmation page that the user is redirected toward after purchasing items
+- [X] \(12/10/2021) User will be able to see their Purchase History
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/purchase_history.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/73
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
+      - ![image](https://user-images.githubusercontent.com/73557066/145662785-cd93bb83-735b-4f8c-955d-88268df383d5.png)
+        - This image shows the users purchase history
+      - ![image](https://user-images.githubusercontent.com/73557066/145662810-b34ced08-835a-4e40-8db7-fcd7db8bec68.png)
+        - This image shows the order details page
+- [X] \(12/10/2021) Store Owner will be able to see all Purchase History
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/admin/all_purchases.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/73
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - ![image](https://user-images.githubusercontent.com/73557066/145662853-4abbaf5f-52d3-4a82-af77-7185fc55efeb.png)
+        - This image shows all purchase history and the store owner can view order details similar to regular users.
 - Milestone 4
 - [ ] \(mm/dd/yyyy of completion) User can set their profile to be public or private (will need another column in Users table)
   -  List of Evidence of Feature Completion

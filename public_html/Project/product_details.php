@@ -41,27 +41,24 @@ try {
     }
 </script>
 <div class="container-fluid">
-    <h1>Shop</h1>
+    <h1>Product Details</h1>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php foreach ($results as $item) : ?>
             <div class="col">
                 <div class="card bg-light text-center">
-                    <div class="card-header">
-                        <h5 class="card-title"><?php se($item, "name"); ?></h5>
-                    </div>
                     <?php if (se($item, "image", "", false)) : ?>
                         <img src="<?php se($item, "image"); ?>" class="card-img-top" alt="...">
                     <?php endif; ?>
-
-                    <div class="card-body">
-                        <p class="card-text">Description: <?php se($item, "description"); ?></p>
-                    </div>
-                    <div class="card-footer">
-                        Price: $<?php se($item, "unit_price"); ?>
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" min="1">
-                        <button onclick="cart('<?php se($item, 'id'); ?>', document.getElementById('quantity').value)" class="btn btn-dark">Add to Cart</button>
-                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h3><?php se($item, "name"); ?></h3>
+                <p>Description: <?php se($item, "description"); ?></p>
+                <h5> Price: $<?php se($item, "unit_price"); ?> </h5>
+                <div class="input-group">
+                    <div class="input-group-text">Quantity</div>
+                    <input class="form-control" type="number" id="quantity" name="quantity" min="1">
+                    <button onclick="cart('<?php se($item, 'id'); ?>', document.getElementById('quantity').value)" class="btn btn-dark">Add to Cart</button>
                 </div>
             </div>
         <?php endforeach; ?>

@@ -96,7 +96,7 @@ if (isset($_POST['order'])) {
     $_POST['name'] .= ", " . $_POST['address'] . ", " . $_POST['appt'] . ", " . $_POST['city'] . ", " . $_POST['state'] . ", " . $_POST['country'] . ", " . $_POST['zip'];
     
     $order['user_id'] = get_user_id();
-    $order['total_price'] = 1;
+    $order['total_price'] = $total_cost;
     $order['address'] = $_POST['name'];
     $order['payment_method'] = $_POST['payment'];
 
@@ -138,6 +138,8 @@ if (isset($_POST['order'])) {
         } catch (PDOException $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
+
+        die(header("Location: order_confirmation.php"));
     }
 }
 ?>
@@ -162,11 +164,12 @@ if (isset($_POST['order'])) {
                 <tr>
                 <?php foreach($record as $column => $value):?>
                     <?php if($column == "desired_quantity"):?>
-                        <td><form method="POST">
-                            <input type="number" id="desired_quantity" name="desired_quantity" min="1" value="<?php se($value);?>"/>
+                        <td width=15%><form method="POST">
+                        <div class="input-group">
+                            <input class="form-control" type="number" id="desired_quantity" name="desired_quantity" min="1" value="<?php se($value);?>"/>
                             <input type="hidden" name="product_id" value="<?php echo $record['id'];?>"/>
                             <input type="submit" name="update" value="Update" class="btn btn-dark"/>
-                        </form></td>
+                        </div></form></td>
                     <?php elseif ($column == "id" || $column == "unit_cost") : ?>
                     <?php elseif ($column == "unit_price") : ?>    
                         <td>$<?php se($value);?></td>
