@@ -28,6 +28,13 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+$count = 0;
+$total = 0;
+foreach ($ratings as $rate) {
+    $count += 1;
+    $total += $rate['rating'];
+}
+$avg_rating = $total/$count;
 
 if (isset($_POST['review'])) {
     $params = [":pid" => $prod, ":uid" => get_user_id(), ":rating" => $_POST['rating'], ":comment" => $_POST['comment']];
@@ -168,7 +175,7 @@ if (isset($_POST['review'])) {
             <?php if (empty($ratings)) : ?>
                 <p>There are no ratings for this product.</p>
             <?php else : ?>
-                <h5>Product Reviews:</h5>
+                <h5>Product Reviews: <?php echo number_format($avg_rating, 2) ?> stars (<?php echo $count ?> reviews)</h5>
             <?php endif; ?>
             <div id="accordion">
                 <?php foreach ($ratings as $rating) : ?>
