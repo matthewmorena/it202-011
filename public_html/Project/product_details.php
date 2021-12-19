@@ -177,23 +177,23 @@ if (isset($_POST['review'])) {
             <?php else : ?>
                 <h5>Product Reviews: <?php echo number_format($avg_rating, 2) ?> stars (<?php echo $count ?> reviews)</h5>
             <?php endif; ?>
-            <div id="accordion">
+            <div class="accordion">
+                <?php $c = 1; ?>
                 <?php foreach ($ratings as $rating) : ?>
-                    <div class="card-bg-light">
-                        <div class="card-header" id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <strong><?php se($rating, 'username') ?></strong> rated <strong><?php se($rating, 'rating') ?> stars</strong>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-heading<?php echo $c; ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse<?php echo $c; ?>" aria-expanded="false" aria-controls="panelsStayOpen-collapse<?php echo $c; ?>">
+                            <strong><?php se($rating, 'username') ?>&nbsp;</strong> rated <strong>&nbsp;<?php se($rating, 'rating') ?> stars</strong>
+                        </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapse<?php echo $c; ?>" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading<?php echo $c; ?>">
+                            <div class="accordion-body">
                                 <p><?php se($rating, 'comment') ?></p>
                                 <p>on <strong><?php se($rating, 'created') ?></strong></p>
                             </div>
                         </div>
                     </div>
+                    <?php $c += 1; ?>
                 <?php endforeach; ?>
             </div>
         </div>
