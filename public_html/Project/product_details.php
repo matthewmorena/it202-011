@@ -5,7 +5,7 @@ require(__DIR__ . "/../../partials/nav.php");
 $results = [];
 $db = getDB();
 
-$prod = $_POST['product'];
+$prod = $_GET['product'];
 $stmt = $db->prepare("SELECT id, name, description, unit_price, stock, image FROM Products WHERE id = $prod");
 try {
     $stmt->execute();
@@ -30,11 +30,7 @@ try {
 }
 $count = 0;
 $total = 0;
-foreach ($ratings as $rate) {
-    $count += 1;
-    $total += $rate['rating'];
-}
-$avg_rating = $total/$count;
+$avg_rating = 0;
 
 if (isset($_POST['review'])) {
     $params = [":pid" => $prod, ":uid" => get_user_id(), ":rating" => $_POST['rating'], ":comment" => $_POST['comment']];
@@ -57,6 +53,15 @@ if (isset($_POST['review'])) {
     }
     flash("Thanks for your feedback!", "success");
 }
+
+foreach ($ratings as $rate) {
+    $count += 1;
+    $total += $rate['rating'];
+}
+if ($count > 0) {
+    $avg_rating = $total/$count;
+}
+
 ?>
 <script>
     function cart(item, quantity) {
@@ -147,7 +152,7 @@ if (isset($_POST['review'])) {
                 <p></p>
                 <div>
                     <h5> Rating: </h5>
-                    <form method="POST">
+                    <form method="POST" action="product_details.php?product=<?php se($item, 'id') ?>">
                         <div class="rating">
                             <input id="star5" name="rating" type="radio" value="5" class="radio-btn hide" />
                             <label for="star5">☆</label>
