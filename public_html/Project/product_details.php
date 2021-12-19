@@ -6,7 +6,12 @@ $results = [];
 $db = getDB();
 
 $prod = $_GET['product'];
-$stmt = $db->prepare("SELECT id, name, description, unit_price, stock, image FROM Products WHERE id = $prod");
+if (!is_numeric($prod)) {
+    flash("Invalid Product ID", "warning");
+    die(header("Location: $BASE_PATH" . "shop.php"));
+}
+
+$stmt = $db->prepare("SELECT id, name, description, unit_price, stock, image FROM Products WHERE id = $prod AND visibility = 1");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -17,8 +22,25 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 
+$base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod";
+$total_query = "SELECT count(*) as total from Ratings WHERE product_id = $prod";
+
+$per_page = 2;
+paginate($total_query, [], $per_page);
+
+$query = " LIMIT :offset, :count";
+$params[":offset"] = $offset;
+$params[":count"] = $per_page;
+
 $ratings = [];
-$stmt = $db->prepare("SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod");
+$stmt = $db->prepare($base_query . $query);
+//we'll want to convert this to use bindValue so ensure they're integers so lets map our array
+foreach ($params as $key => $value) {
+    $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+    $stmt->bindValue($key, $value, $type);
+}
+$params = null;
+
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,15 +55,32 @@ $total = 0;
 $avg_rating = 0;
 
 if (isset($_POST['review'])) {
-    $params = [":pid" => $prod, ":uid" => get_user_id(), ":rating" => $_POST['rating'], ":comment" => $_POST['comment']];
+    $r_params = [":pid" => $prod, ":uid" => get_user_id(), ":rating" => $_POST['rating'], ":comment" => $_POST['comment']];
     $stmt = $db->prepare("INSERT INTO Ratings(product_id, user_id, rating, comment) VALUES (:pid, :uid, :rating, :comment);");
     try {
-        $stmt->execute($params);
+        $stmt->execute($r_params);
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
 
-    $stmt = $db->prepare("SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod");
+    $base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod";
+    $total_query = "SELECT count(*) as total from Ratings WHERE product_id = $prod";
+
+    $per_page = 2;
+    paginate($total_query, [], $per_page);
+
+    $query = " LIMIT :offset, :count";
+    $params[":offset"] = $offset;
+    $params[":count"] = $per_page;
+
+    $ratings = [];
+    $stmt = $db->prepare($base_query . $query);
+    //we'll want to convert this to use bindValue so ensure they're integers so lets map our array
+    foreach ($params as $key => $value) {
+        $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+        $stmt->bindValue($key, $value, $type);
+    }
+    $params = null;
     try {
         $stmt->execute();
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -51,10 +90,21 @@ if (isset($_POST['review'])) {
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
+
     flash("Thanks for your feedback!", "success");
 }
-
-foreach ($ratings as $rate) {
+$score = [];
+$stmt = $db->prepare("SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod");
+try {
+    $stmt->execute();
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $score = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+foreach ($score as $rate) {
     $count += 1;
     $total += $rate['rating'];
 }
@@ -181,6 +231,19 @@ if ($count > 0) {
                 <p>There are no ratings for this product.</p>
             <?php else : ?>
                 <h5>Product Reviews: <?php echo number_format($avg_rating, 2) ?> stars (<?php echo $count ?> reviews)</h5>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item <?php echo ($page - 1) < 1 ? "disabled" : ""; ?>">
+                            <a class="page-link" href="?<?php se(persistQueryString($page - 1)); ?>" tabindex="-1">Previous</a>
+                        </li>
+                        <?php for ($i = 0; $i < $total_pages; $i++) : ?>
+                            <li class="page-item <?php echo ($page - 1) == $i ? "active" : ""; ?>"><a class="page-link" href="?<?php se(persistQueryString($i + 1)); ?>"><?php echo ($i + 1); ?></a></li>
+                        <?php endfor; ?>
+                        <li class="page-item <?php echo ($page) >= $total_pages ? "disabled" : ""; ?>">
+                            <a class="page-link" href="?<?php se(persistQueryString($page + 1)); ?>">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             <?php endif; ?>
             <div class="accordion">
                 <?php $c = 1; ?>
