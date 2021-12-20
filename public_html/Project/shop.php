@@ -180,9 +180,9 @@ try {
                         <p class="card-text"><em> <?php se($item, "description"); ?> </em></p>
                     </div>
                     <div class="card-footer">
-                        Price: $<?php number_format(se($item, "unit_price"), 2, '.', ','); ?> <br />
+                        Price: $<?php se($item, "unit_price"); ?> <br />
                         Stock: <?php se($item, "stock"); ?> <br />
-                        Rating: <?php number_format(se($item, "rating"), 2); ?> stars
+                        Rating: <?php se($item, "rating"); ?> stars
                         <form method="GET" action="product_details.php">
                             <button class="btn btn-dark" name="product" value="<?php se($item, "id"); ?>" >Details</button>
                         </form>
