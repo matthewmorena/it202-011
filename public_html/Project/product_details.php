@@ -19,7 +19,8 @@ try {
         $results = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 
 $base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod";
@@ -48,7 +49,8 @@ try {
         $ratings = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 $count = 0;
 $total = 0;
@@ -60,7 +62,8 @@ if (isset($_POST['review'])) {
     try {
         $stmt->execute($r_params);
     } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
+        //flash("<pre>" . var_export($e, true) . "</pre>");
+        flash("We had some problems processing your request, please try again.", "danger");
     }
 
     $base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod";
@@ -88,7 +91,8 @@ if (isset($_POST['review'])) {
             $ratings = $r;
         }
     } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
+        //flash("<pre>" . var_export($e, true) . "</pre>");
+        flash("We had some problems processing your request, please try again.", "danger");
     }
 
     flash("Thanks for your feedback!", "success");
@@ -102,7 +106,8 @@ try {
         $score = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 foreach ($score as $rate) {
     $count += 1;
@@ -120,7 +125,8 @@ try {
         $score = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 
 ?>

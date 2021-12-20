@@ -78,7 +78,9 @@ if (isset($_POST["save"])) {
                     }
                 }
             } catch (Exception $e) {
-                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                //flash("<pre>" . var_export($e, true) . "</pre>");
+                flash("We had some problems processing your request, please try again.", "danger");
             }
         } else {
             flash("New passwords don't match", "warning");

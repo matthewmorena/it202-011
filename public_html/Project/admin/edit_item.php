@@ -29,7 +29,8 @@ try {
         $result = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 function mapColumn($col)
 {

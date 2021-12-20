@@ -33,7 +33,8 @@ try {
         $results = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 
 $pop_items = [];
@@ -47,7 +48,8 @@ try {
         $pop_items = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 
 ?>

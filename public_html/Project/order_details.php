@@ -18,7 +18,8 @@ try {
         $results = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 $stmt = $db->prepare("SELECT address, payment_method from Orders WHERE id = :oid");
 try {
@@ -28,7 +29,8 @@ try {
         $user_info = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 $total_cost = 0;
 ?>

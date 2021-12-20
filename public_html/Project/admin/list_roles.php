@@ -16,7 +16,8 @@ if (isset($_POST["role_id"])) {
             $stmt->execute([":rid" => $role_id]);
             flash("Updated Role", "success");
         } catch (PDOException $e) {
-            flash(var_export($e->errorInfo, true), "danger");
+            //flash("<pre>" . var_export($e, true) . "</pre>");
+            flash("We had some problems processing your request, please try again.", "danger");
         }
     }
 }
@@ -40,7 +41,8 @@ try {
         flash("No matches found", "warning");
     }
 } catch (PDOException $e) {
-    flash(var_export($e->errorInfo, true), "danger");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 
 ?>

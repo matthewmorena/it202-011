@@ -16,7 +16,8 @@ try {
         $oid = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 $stmt = $db->prepare("SELECT OrderItems.order_id, OrderItems.product_id, Products.name, Products.unit_price, OrderItems.quantity, OrderItems.user_id
 FROM OrderItems LEFT JOIN Products ON OrderItems.product_id = Products.id WHERE OrderItems.order_id = :oid AND OrderItems.user_id = :uid;");
@@ -27,7 +28,8 @@ try {
         $results = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 $stmt = $db->prepare("SELECT address, payment_method from Orders WHERE id = :oid");
 try {
@@ -37,7 +39,8 @@ try {
         $user_info = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 $total_cost = 0;
 ?>
