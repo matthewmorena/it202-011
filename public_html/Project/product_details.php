@@ -154,6 +154,8 @@ try {
     }
 </script>
 <style>
+    /* https://stackoverflow.com/questions/8118266/integrating-css-star-rating-into-an-html-form */
+    
     .txt-center {
         text-align: center;
     }
