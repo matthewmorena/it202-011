@@ -112,6 +112,17 @@ if ($count > 0) {
     $avg_rating = $total/$count;
 }
 
+$stmt = $db->prepare("UPDATE Products SET rating = $avg_rating WHERE id = $prod");
+try {
+    $stmt->execute();
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $score = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+
 ?>
 <script>
     function cart(item, quantity) {

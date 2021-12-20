@@ -20,7 +20,7 @@ try {
 //Sort and Filters
 $col = se($_GET, "col", "unit_price", false);
 //allowed list
-if (!in_array($col, ["unit_price", "stock", "name", "created", "category"])) {
+if (!in_array($col, ["unit_price", "stock", "name", "created", "category", "rating"])) {
     $col = "unit_price"; //default value, prevent sql injection
 }
 $order = se($_GET, "order", "asc", false);
@@ -31,7 +31,7 @@ if (!in_array($order, ["asc", "desc"])) {
 $name = se($_GET, "name", "", false);
 $category = se($_GET, "category", "", false);
 //dynamic query
-$base_query = "SELECT id, name, description, unit_price, stock, category, image FROM Products"; //1=1 shortcut to conditionally build AND clauses
+$base_query = "SELECT id, name, description, unit_price, stock, category, image, rating FROM Products"; //1=1 shortcut to conditionally build AND clauses
 $total_query = "SELECT count(*) as total FROM Products";
 $query = " WHERE stock > 0 AND visibility = 1";
 
@@ -118,6 +118,7 @@ try {
                             <option value="stock">Stock</option>
                             <option value="name">Name</option>
                             <option value="created">Created</option>
+                            <option value="rating">Rating</option>
                         </select>
                         <script>
                             //quick fix to ensure proper value is selected since
@@ -178,7 +179,8 @@ try {
                     </div>
                     <div class="card-footer">
                         Price: $<?php number_format(se($item, "unit_price"), 2, '.', ','); ?> <br />
-                        Stock: <?php se($item, "stock"); ?>
+                        Stock: <?php se($item, "stock"); ?> <br />
+                        Rating: <?php number_format(se($item, "rating"), 2); ?> stars
                         <form method="GET" action="product_details.php">
                             <button class="btn btn-dark" name="product" value="<?php se($item, "id"); ?>" >Details</button>
                         </form>
