@@ -204,6 +204,7 @@ try {
             <div class="col">
                 <h3><?php se($item, "name"); ?></h3>
                 <p>Description: <?php se($item, "description"); ?></p>
+                <p>Stock: <?php se($item, "stock"); ?></p>
                 <h5> Price: $<?php se($item, "unit_price"); ?> </h5>
                 <div class="input-group">
                     <div class="input-group-text">Quantity</div>

@@ -83,7 +83,7 @@ try {
 </script>
 
 <div class="container-fluid">
-    <h1>Shop</h1>
+    <h1>Shop All Products</h1>
     <div class="row">
         <div class="col-auto">
             <form class="row row-cols-auto g-3 align-items-center">
