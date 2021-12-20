@@ -94,7 +94,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                 }
             }
         } catch (Exception $e) {
-            flash("<pre>" . var_export($e, true) . "</pre>");
+            //flash("<pre>" . var_export($e, true) . "</pre>");
+            flash("We had some problems processing your request, please try again.", "danger");
         }
     }
 }

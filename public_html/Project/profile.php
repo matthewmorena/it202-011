@@ -6,6 +6,7 @@ is_logged_in(true);
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
+    $visibility = se($_POST, "visibility", null, false);
     $hasError = false;
     //sanitize
     $email = sanitize_email($email);
@@ -18,18 +19,23 @@ if (isset($_POST["save"])) {
         flash("Username must only be alphanumeric and can only contain - or _", "danger");
         $hasError = true;
     }
+    if ($visibility != 0 && $visibility != 1) {
+        flash("An error with your profile visibility occurred", "danger");
+        $hasError = true;
+    }
     if (!$hasError) {
-        $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+        $params = [":email" => $email, ":username" => $username, ":vis" => $visibility, ":id" => get_user_id()];
         $db = getDB();
-        $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+        $stmt = $db->prepare("UPDATE Users set email = :email, username = :username, visibility = :vis where id = :id");
         try {
             $stmt->execute($params);
+            flash("Your profile has been updated!", "success");
         } catch (Exception $e) {
             users_check_duplicate($e->errorInfo);
         }
     }
     //select fresh data from table
-    $stmt = $db->prepare("SELECT id, email, IFNULL(username, email) as `username` from Users where id = :id LIMIT 1");
+    $stmt = $db->prepare("SELECT id, email, IFNULL(username, email) as `username`, visibility from Users where id = :id LIMIT 1");
     try {
         $stmt->execute([":id" => get_user_id()]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -72,11 +78,29 @@ if (isset($_POST["save"])) {
                     }
                 }
             } catch (Exception $e) {
-                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                //flash("<pre>" . var_export($e, true) . "</pre>");
+                flash("We had some problems processing your request, please try again.", "danger");
             }
         } else {
             flash("New passwords don't match", "warning");
         }
+    }
+} else {
+    $db = getDB();
+    $stmt = $db->prepare("SELECT visibility from Users where id = :id LIMIT 1");
+    try {
+        $stmt->execute([":id" => get_user_id()]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user) {
+            //$_SESSION["user"] = $user;
+            $visibility = $user["visibility"];
+        } else {
+            flash("User doesn't exist", "danger");
+        }
+    } catch (Exception $e) {
+        flash("An unexpected error occurred, please try again", "danger");
+        //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
     }
 }
 ?>
@@ -109,6 +133,27 @@ $username = get_username();
         <div class="mb-3">
             <label class="form-label" for="conp">Confirm Password</label>
             <input class="form-control" type="password" name="confirmPassword" id="conp" />
+        </div>
+        <legend class="col-form-label col-sm-2 pt-0">Profile Visibility</legend>
+        <div class="form-check">
+            <?php if ($visibility == 0 ) : ?>
+                <input class="form-check-input" type="radio" name="visibility" id="private" value="0" checked>
+            <?php else : ?>
+                <input class="form-check-input" type="radio" name="visibility" id="private" value="0" checked>
+            <?php endif; ?>
+            <label class="form-check-label" for="private">
+                Private
+            </label>
+        </div>
+        <div class="form-check">
+            <?php if ($visibility == 0 ) : ?>
+                <input class="form-check-input" type="radio" name="visibility" id="public" value="1">
+            <?php else : ?>
+                <input class="form-check-input" type="radio" name="visibility" id="public" value="1" checked>
+            <?php endif; ?>
+            <label class="form-check-label" for="public">
+                Public
+            </label>
         </div>
         <input type="submit" class="mt-3 btn btn-dark" value="Update Profile" name="save" />
     </form>

@@ -14,13 +14,14 @@ try {
         $item_categories = $c;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 
 //Sort and Filters
 $col = se($_GET, "col", "unit_price", false);
 //allowed list
-if (!in_array($col, ["unit_price", "stock", "name", "created", "category"])) {
+if (!in_array($col, ["unit_price", "stock", "name", "created", "category", "rating"])) {
     $col = "unit_price"; //default value, prevent sql injection
 }
 $order = se($_GET, "order", "asc", false);
@@ -31,7 +32,10 @@ if (!in_array($order, ["asc", "desc"])) {
 $name = se($_GET, "name", "", false);
 $category = se($_GET, "category", "", false);
 //dynamic query
-$query = "SELECT id, name, description, unit_price, stock, category, image FROM Products WHERE stock > 0 AND visibility = 1"; //1=1 shortcut to conditionally build AND clauses
+$base_query = "SELECT id, name, description, unit_price, stock, category, image, rating FROM Products"; //1=1 shortcut to conditionally build AND clauses
+$total_query = "SELECT count(*) as total FROM Products";
+$query = " WHERE stock > 0 AND visibility = 1";
+
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
 if (!empty($name)) {
@@ -46,8 +50,21 @@ if (!empty($category)) {
 if (!empty($col) && !empty($order)) {
     $query .= " ORDER BY $col $order"; //be sure you trust these values, I validate via the in_array checks above
 }
-$query .= " LIMIT 10";
-$stmt = $db->prepare($query);
+
+$per_page = 12;
+paginate($total_query . $query, $params, $per_page);
+
+$query .= " LIMIT :offset, :count";
+$params[":offset"] = $offset;
+$params[":count"] = $per_page;
+
+$stmt = $db->prepare($base_query . $query);
+//we'll want to convert this to use bindValue so ensure they're integers so lets map our array
+foreach ($params as $key => $value) {
+    $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+    $stmt->bindValue($key, $value, $type);
+}
+$params = null; //set it to null to avoid issues
 //$stmt = $db->prepare("SELECT id, name, description, unit_price, stock, image FROM Products WHERE stock > 0 AND visibility = 1 LIMIT 10");
 try {
     $stmt->execute($params);
@@ -56,7 +73,8 @@ try {
         $results = $r;
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    //flash("<pre>" . var_export($e, true) . "</pre>");
+    flash("We had some problems processing your request, please try again.", "danger");
 }
 ?>
 <script>
@@ -67,84 +85,105 @@ try {
 </script>
 
 <div class="container-fluid">
-    <h1>Shop</h1>
-    <form class="row row-cols-auto g-3 align-items-center">
-        <div class="col">
-            <div class="input-group">
-                <div class="input-group-text">Name</div>
-                <input class="form-control" name="name" value="<?php se($name); ?>" />
-            </div>
+    <h1>Shop All Products</h1>
+    <div class="row">
+        <div class="col-auto">
+            <form class="row row-cols-auto g-3 align-items-center">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-text">Name</div>
+                        <input class="form-control" name="name" value="<?php se($name); ?>" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-text">Category</div>
+                        <select class="form-control" name="category" value="<?php se($category); ?>">
+                            <option value=""> None </option>    
+                            <?php foreach ($item_categories as $cat) : ?>
+                                <option value="<?php se($cat["category"]); ?>" style="text-transform: capitalize;"> <?php se($cat["category"]); ?> </option>
+                            <?php endforeach ?>
+                        </select>
+                        <script>
+                            //quick fix to ensure proper value is selected since
+                            //value setting only works after the options are defined and php has the value set prior
+                            document.forms[0].category.value = "<?php se($category); ?>";
+                        </script>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-text">Sort</div>
+                        <!-- make sure these match the in_array filter above-->
+                        <select class="form-control" name="col" value="<?php se($col); ?>">
+                            <option value="unit_price">Price</option>
+                            <option value="stock">Stock</option>
+                            <option value="name">Name</option>
+                            <option value="created">Created</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                        <script>
+                            //quick fix to ensure proper value is selected since
+                            //value setting only works after the options are defined and php has the value set prior
+                            document.forms[0].col.value = "<?php se($col); ?>";
+                        </script>
+                        <select class="form-control" name="order" value="<?php se($order); ?>">
+                            <option value="asc">Up</option>
+                            <option value="desc">Down</option>
+                        </select>
+                        <script>
+                            //quick fix to ensure proper value is selected since
+                            //value setting only works after the options are defined and php has the value set prior
+                            document.forms[0].order.value = "<?php se($order); ?>";
+                        </script>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <input type="submit" class="btn btn-primary" value="Apply" />
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col">
-            <div class="input-group">
-                <div class="input-group-text">Category</div>
-                <select class="form-control" name="category" value="<?php se($category); ?>">
-                    <option value=""> none </option>    
-                    <?php foreach ($item_categories as $cat) : ?>
-                        <option value="<?php se($cat["category"]); ?>"> <?php se($cat["category"]); ?> </option>
-                    <?php endforeach ?>
-                </select>
-                <script>
-                    //quick fix to ensure proper value is selected since
-                    //value setting only works after the options are defined and php has the value set prior
-                    document.forms[0].category.value = "<?php se($category); ?>";
-                </script>
-            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item <?php echo ($page - 1) < 1 ? "disabled" : ""; ?>">
+                        <a class="page-link" href="?<?php se(persistQueryString($page - 1)); ?>" tabindex="-1">Previous</a>
+                    </li>
+                    <?php for ($i = 0; $i < $total_pages; $i++) : ?>
+                        <li class="page-item <?php echo ($page - 1) == $i ? "active" : ""; ?>"><a class="page-link" href="?<?php se(persistQueryString($i + 1)); ?>"><?php echo ($i + 1); ?></a></li>
+                    <?php endfor; ?>
+                    <li class="page-item <?php echo ($page) >= $total_pages ? "disabled" : ""; ?>">
+                        <a class="page-link" href="?<?php se(persistQueryString($page + 1)); ?>">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <div class="col">
-            <div class="input-group">
-                <div class="input-group-text">Sort</div>
-                <!-- make sure these match the in_array filter above-->
-                <select class="form-control" name="col" value="<?php se($col); ?>">
-                    <option value="unit_price">Price</option>
-                    <option value="stock">Stock</option>
-                    <option value="name">Name</option>
-                    <option value="created">Created</option>
-                </select>
-                <script>
-                    //quick fix to ensure proper value is selected since
-                    //value setting only works after the options are defined and php has the value set prior
-                    document.forms[0].col.value = "<?php se($col); ?>";
-                </script>
-                <select class="form-control" name="order" value="<?php se($order); ?>">
-                    <option value="asc">Up</option>
-                    <option value="desc">Down</option>
-                </select>
-                <script>
-                    //quick fix to ensure proper value is selected since
-                    //value setting only works after the options are defined and php has the value set prior
-                    document.forms[0].order.value = "<?php se($order); ?>";
-                </script>
-            </div>
-        </div>
-        <div class="col">
-            <div class="input-group">
-                <input type="submit" class="btn btn-primary" value="Apply" />
-            </div>
-        </div>
-    </form>
+    </div>
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <?php if (empty($results)) : ?>
             <p>No results to show</p>
         <?php endif; ?>
         <?php foreach ($results as $item) : ?>
-            <div class="col">
+            <div class="col-lg-2 d-flex align-items-stretch">
                 <div class="card bg-light">
-                    <div class="card-header">
+                    <div class="card-header" style="text-transform: capitalize;">
                         <?php se($item, "category"); ?>
                     </div>
                     <?php if (se($item, "image", "", false)) : ?>
-                        <img src="<?php se($item, "image"); ?>" class="card-img-top" alt="...">
+                        <img src="<?php se($item, "image"); ?>" class="card-img-top" alt="..." height="200">
                     <?php endif; ?>
 
                     <div class="card-body">
-                        <h5 class="card-title">Name: <?php se($item, "name"); ?></h5>
-                        <p class="card-text">Description: <?php se($item, "description"); ?></p>
+                        <h5 class="card-title"> <?php se($item, "name"); ?></h5>
+                        <p class="card-text"><em> <?php se($item, "description"); ?> </em></p>
                     </div>
                     <div class="card-footer">
-                        Price: $<?php se($item, "unit_price"); ?> <br />
-                        Stock: <?php se($item, "stock"); ?>
-                        <form method="POST" action="product_details.php">
+                        Price: $<?php number_format(se($item, "unit_price"), 2, '.', ','); ?> <br />
+                        Stock: <?php se($item, "stock"); ?> <br />
+                        Rating: <?php number_format(se($item, "rating"), 2); ?> stars
+                        <form method="GET" action="product_details.php">
                             <button class="btn btn-dark" name="product" value="<?php se($item, "id"); ?>" >Details</button>
                         </form>
                     </div>
