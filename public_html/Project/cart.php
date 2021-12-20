@@ -161,11 +161,11 @@ if (isset($_POST['order'])) {
             <?php foreach ($results as $index => $record) : ?>
                 <?php if ($index == 0) : ?>
                     <thead>
-                        <?php foreach ($record as $column => $value) : ?>
-                            <?php if ($column != "id" && $column != "unit_cost") : ?>
-                                <th><?php se($column); ?></th>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Stock</th>
+                        <th>Unit Price</th>
+                        <th>Desired Quantity</th>
                         <th>Subtotal</th>
                         <th>Actions</th>
                     </thead>

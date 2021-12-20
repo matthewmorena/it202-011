@@ -175,15 +175,21 @@ try {
             <?php foreach ($results as $index => $record) : ?>
                 <?php if ($index == 0) : ?>
                     <thead>
-                        <?php foreach ($record as $column => $value) : ?>
-                            <th><?php se($column); ?></th>
-                        <?php endforeach; ?>
+                        <th>Order ID</th>
+                        <th>Total Price</th>
+                        <th>Order Date</th>
                         <th>Actions</th>
                     </thead>
                 <?php endif; ?>
                 <tr>
                     <?php foreach ($record as $column => $value) : ?>
-                        <td><?php se($value, null, "N/A"); ?></td>
+                        <?php if ($column == "user_id") : ?>
+                            
+                        <?php elseif ($column == "total_price") : ?>
+                            <td>$<?php se($value, null, "N/A"); ?></td>
+                        <?php else : ?>
+                            <td><?php se($value, null, "N/A"); ?></td>
+                        <?php endif; ?>
                     <?php endforeach; ?>
 
 
