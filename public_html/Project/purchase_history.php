@@ -46,7 +46,7 @@ if (!empty($start_date)) {
     $query .= " AND Orders.created >= :start";
     $params[":start"] = "$start_date 00:00:00";
 }
-if (!empty($start_date)) {
+if (!empty($end_date)) {
     $query .= " AND Orders.created <= :end";
     $params[":end"] = "$end_date 23:59:59";
 }
@@ -58,9 +58,8 @@ if (!empty($category)) {
 if (!empty($col) && !empty($order)) {
     $query .= " ORDER BY Orders.$col $order"; //be sure you trust these values, I validate via the in_array checks above
 }
-var_dump($params);
 $params[":uid"] = get_user_id();
-$per_page = 4;
+$per_page = 10;
 paginate($total_query . $query, $params, $per_page);
 
 $query .= " LIMIT :offset, :count";

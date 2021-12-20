@@ -47,7 +47,7 @@ if (!empty($start_date)) {
     $query .= " AND Orders.created >= :start";
     $params[":start"] = "$start_date 00:00:00";
 }
-if (!empty($start_date)) {
+if (!empty($end_date)) {
     $query .= " AND Orders.created <= :end";
     $params[":end"] = "$end_date 23:59:59";
 }
@@ -59,7 +59,7 @@ if (!empty($category)) {
 if (!empty($col) && !empty($order)) {
     $query .= " ORDER BY Orders.$col $order"; //be sure you trust these values, I validate via the in_array checks above
 }
-$per_page = 4;
+$per_page = 10;
 paginate($total_query . $query, $params, $per_page);
 
 $query .= " LIMIT :offset, :count";
@@ -83,6 +83,10 @@ try {
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
+}
+$total = 0;
+foreach ($results as $result) {
+    $total += $result['total_price'];
 }
 
 ?>
@@ -190,6 +194,13 @@ try {
                     </td>
                 </tr>
             <?php endforeach; ?>
+            <tr>
+                <td></td>
+                <td></td>
+                <td> $<?php echo $total ?> </td>
+                <td></td>
+                <td></td>
+            </tr>
         </table>
     <?php endif; ?>
 </div>

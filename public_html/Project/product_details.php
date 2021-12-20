@@ -25,7 +25,7 @@ try {
 $base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod";
 $total_query = "SELECT count(*) as total from Ratings WHERE product_id = $prod";
 
-$per_page = 2;
+$per_page = 10;
 paginate($total_query, [], $per_page);
 
 $query = " LIMIT :offset, :count";
@@ -66,7 +66,7 @@ if (isset($_POST['review'])) {
     $base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod";
     $total_query = "SELECT count(*) as total from Ratings WHERE product_id = $prod";
 
-    $per_page = 2;
+    $per_page = 10;
     paginate($total_query, [], $per_page);
 
     $query = " LIMIT :offset, :count";

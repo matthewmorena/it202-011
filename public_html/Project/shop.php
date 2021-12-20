@@ -50,7 +50,7 @@ if (!empty($col) && !empty($order)) {
     $query .= " ORDER BY $col $order"; //be sure you trust these values, I validate via the in_array checks above
 }
 
-$per_page = 4;
+$per_page = 12;
 paginate($total_query . $query, $params, $per_page);
 
 $query .= " LIMIT :offset, :count";
