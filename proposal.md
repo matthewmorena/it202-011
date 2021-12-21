@@ -255,7 +255,7 @@
     - Pull Requests
       - https://github.com/matthewmorena/it202-011/pull/80
     - Screenshots
-      - ![image](https://user-images.githubusercontent.com/73557066/146848329-e062f251-0750-4e5c-8d4a-3e5ef75d60a9.png)
+      - ![image](https://user-images.githubusercontent.com/73557066/146857081-86065c55-850a-4f7d-acfa-e749a2b4d367.png)
         - The user can set their profile visibility to public or private on the profile page.
 - [X] \(12/19/2021) User will be able to rate a product they purchased
   -  List of Evidence of Feature Completion
