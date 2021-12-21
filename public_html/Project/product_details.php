@@ -66,9 +66,10 @@ if (isset($_POST['review'])) {
         flash("We had some problems processing your request, please try again.", "danger");
     }
 
-    $base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = $prod";
-    $total_query = "SELECT count(*) as total from Ratings WHERE product_id = $prod";
+    $base_query = "SELECT Ratings.id, Ratings.user_id, rating, comment, Ratings.created, username FROM Ratings LEFT JOIN Users ON Ratings.user_id = Users.id WHERE product_id = :pid";
+    $total_query = "SELECT count(*) as total from Ratings WHERE product_id = :pid";
 
+    $params[":pid"] = $prod;
     $per_page = 10;
     paginate($total_query, [], $per_page);
 
@@ -277,7 +278,8 @@ try {
                         <div id="panelsStayOpen-collapse<?php echo $c; ?>" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading<?php echo $c; ?>">
                             <div class="accordion-body">
                                 <p><?php se($rating, 'comment') ?></p>
-                                <p>on <strong><?php se($rating, 'created') ?></strong></p>
+                                <p>on <strong><?php se($rating, 'created') ?></strong></p> <hr />
+                                <a href="profile.php?id=<?php se($rating, 'user_id') ?>"> view <?php se($rating, 'username') ?>'s profile</a>
                             </div>
                         </div>
                     </div>
