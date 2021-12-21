@@ -8,7 +8,7 @@ $db = getDB();
 $prod = $_GET['product'];
 if (!is_numeric($prod)) {
     flash("Invalid Product ID", "warning");
-    die(header("Location: $BASE_PATH" . "shop.php"));
+    redirect("$BASE_PATH" . "shop.php");
 }
 
 $stmt = $db->prepare("SELECT id, name, description, unit_price, stock, image FROM Products WHERE id = $prod AND visibility = 1");
