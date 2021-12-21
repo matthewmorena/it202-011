@@ -248,69 +248,69 @@
       - ![image](https://user-images.githubusercontent.com/73557066/145662853-4abbaf5f-52d3-4a82-af77-7185fc55efeb.png)
         - This image shows all purchase history and the store owner can view order details similar to regular users.
 - Milestone 4
-- [ ] \(mm/dd/yyyy of completion) User can set their profile to be public or private (will need another column in Users table)
+- [X] \(12/19/2021) User can set their profile to be public or private (will need another column in Users table)
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Complete
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/profile.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/80
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User will be able to rate a product they purchased
+      - ![image](https://user-images.githubusercontent.com/73557066/146848329-e062f251-0750-4e5c-8d4a-3e5ef75d60a9.png)
+        - The user can set their profile visibility to public or private on the profile page.
+- [X] \(12/19/2021) User will be able to rate a product they purchased
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/product_details.php?product=2
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/80
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User’s Purchase History Changes
+      - ![image](https://user-images.githubusercontent.com/73557066/146848444-80fda356-edbb-4a37-8b79-0dbf4c8db688.png)
+        - The user can leave a star rating and review on the product details page of any product.
+- [X] \(12/20/2021) User’s Purchase History Changes
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/purchase_history.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/81
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Store Owner Purchase History Changes
+      - ![image](https://user-images.githubusercontent.com/73557066/146848757-280517de-1638-4aa5-91d5-ff116f937f01.png)
+        - The user can filter their purchase history by date and using any of the filters in the top form.
+- [X] \(12/20/2021) Store Owner Purchase History Changes
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/admin/all_purchases.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/81
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Add pagination to Shop Page (and any other product lists not yet mentioned)
+      - ![image](https://user-images.githubusercontent.com/73557066/146848847-b1051e41-6387-4b62-96a2-d3ca44864210.png)
+        - The store owner has access to all of the same filters and can view the total price of orders at the bottom.
+- [X] \(12/20/2021) Add pagination to Shop Page (and any other product lists not yet mentioned)
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/shop.php?page=2
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/81
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all products out of stock
+      - ![image](https://user-images.githubusercontent.com/73557066/146848958-37d6e2d1-e8f9-4aa1-b42d-568c501f2513.png)
+        - Shop page is broken down into sets of 12 items per "page" and can be flipped through using the selector at the top.
+- [X] \(12/20/2021) Store Owner will be able to see all products out of stock
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/admin/list_items.php
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/81
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
-- [ ] \(mm/dd/yyyy of completion) User can sort products by average rating on the Shop Page
+      - ![image](https://user-images.githubusercontent.com/73557066/146849263-d54c289c-c0fe-4f0c-8b34-55cc464a52e0.png)
+        - Store owner can see all products and can use the extra filter provided to see in stock or out of stock products.
+- [X] \(12/20/2021) User can sort products by average rating on the Shop Page
   -  List of Evidence of Feature Completion
-    - Status: Pending (Completed, Partially working, Incomplete, Pending)
-    - Direct Link: (Direct link to the file or files in heroku prod for quick testing (even if it's a protected page))
+    - Status: Completed
+    - Direct Link: https://mem63-prod.herokuapp.com/Project/shop.php?name=&category=&col=rating&order=desc
     - Pull Requests
-      - PR link #1 (repeat as necessary)
+      - https://github.com/matthewmorena/it202-011/pull/81
     - Screenshots
-      - Screenshot #1 (paste the image so it uploads to github) (repeat as necessary)
-        - Screenshot #1 description explaining what you're trying to show
+      - ![image](https://user-images.githubusercontent.com/73557066/146849347-9f7f97cb-5c0f-40f0-a007-c0b5f7a4429e.png)
+        - The user can select sort by rating using the form at the top of the page
 ### Intructions
 #### Don't delete this
 1. Pick one project type
