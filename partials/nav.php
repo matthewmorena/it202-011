@@ -62,6 +62,8 @@ require_once(__DIR__ . "/../lib/functions.php");
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('shop.php'); ?>">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('cart.php'); ?>">Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('purchase_history.php'); ?>">Purchase History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('about.php'); ?>">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('terms.php'); ?>">Terms of Use</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
                 <?php endif; ?>
             </ul>
